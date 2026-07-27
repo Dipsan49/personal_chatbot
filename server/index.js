@@ -64,13 +64,6 @@ app.get("/api/health", (_request, response) => {
   response.json({ ok: true });
 });
 
-app.get("/resume", (_request, response) => {
-  response.download(
-    resolve(root, "Dipsan_Bhattarai_Resume.pdf"),
-    "Dipsan_Bhattarai_Resume.pdf",
-  );
-});
-
 app.use(
   "/api/chat",
   rateLimit({
