@@ -15,6 +15,7 @@ technical skills, and personal interests.
    OLLAMA_BASE_URL=https://ollama.com
    OLLAMA_CHAT_MODEL=gpt-oss:20b
    OLLAMA_EMBEDDING_MODEL=
+   RESUME_CONTENT=
    RESUME_PATH=
    PORT=3000
    ```
@@ -50,9 +51,8 @@ The cloud model and Ollama address can be overridden in `.env`.
 2. In Render, create a Blueprint and select the repository. Render reads
    `render.yaml`.
 3. Enter `OLLAMA_API_KEY` when prompted. Do not place the key in GitHub.
-4. In the Render service, open **Environment → Secret Files**, add a file
-   named `resume.md`, and paste the contents of your local
-   `knowledge/resume.md`. Render exposes it at `/etc/secrets/resume.md`.
+4. For `RESUME_CONTENT`, paste the complete contents of your private local
+   `knowledge/resume.md`.
 5. Deploy and open the generated `onrender.com` URL.
 
 After deployment, the Express server and Ollama Cloud run independently of your

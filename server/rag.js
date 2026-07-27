@@ -16,6 +16,11 @@ function getKnowledgePath() {
     : localKnowledgePath;
 }
 
+async function readKnowledge() {
+  const inlineResume = process.env.RESUME_CONTENT?.trim();
+  return inlineResume || readFile(getKnowledgePath(), "utf8");
+}
+
 function normaliseWhitespace(value) {
   return value.replace(/\s+/g, " ").trim();
 }
@@ -142,7 +147,7 @@ function intentBoost(query, title) {
 
 export async function loadKnowledge() {
   if (!knowledgePromise) {
-    knowledgePromise = readFile(getKnowledgePath(), "utf8").then((resume) => {
+    knowledgePromise = readKnowledge().then((resume) => {
       const sections = resume
         .split(/\n(?=## )/)
         .map((section, index) => {

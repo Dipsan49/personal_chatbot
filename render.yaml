@@ -15,5 +15,5 @@ services:
         value: gpt-oss:20b
       - key: OLLAMA_EMBEDDING_MODEL
         value: ""
-      - key: RESUME_PATH
-        value: /etc/secrets/resume.md
+      - key: RESUME_CONTENT
+        sync: false
