@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: ask-dipsan
+    runtime: node
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: OLLAMA_API_KEY
+        sync: false
+      - key: OLLAMA_BASE_URL
+        value: https://ollama.com
+      - key: OLLAMA_CHAT_MODEL
+        value: gpt-oss:20b
+      - key: OLLAMA_EMBEDDING_MODEL
+        value: ""
