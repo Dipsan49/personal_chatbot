@@ -262,7 +262,7 @@ if (
   process.argv[1] &&
   fileURLToPath(import.meta.url) === resolve(process.argv[1])
 ) {
-  app.listen(port, () => {
+  app.listen(port, "0.0.0.0", () => {
     console.log(`Ask Dipsan is running at http://localhost:${port}`);
     console.log(
       `${isCloud ? "Cloud" : "Local"} AI: ${chatModel} at ${ollama.baseUrl}`,

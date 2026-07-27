@@ -2,6 +2,7 @@ services:
   - type: web
     name: ask-dipsan
     runtime: node
+    plan: free
     buildCommand: npm ci && npm run build
     startCommand: npm start
     healthCheckPath: /api/health
