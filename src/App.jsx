@@ -1,6 +1,8 @@
 import {
   ArrowUp,
   ArrowUpRight,
+  Check,
+  Copy,
   Github,
   Linkedin,
   MapPin,
@@ -33,6 +35,17 @@ function ThinkingIndicator() {
 
 function Message({ message }) {
   const isAssistant = message.role === "assistant";
+  const [copied, setCopied] = useState(false);
+
+  async function copyResponse() {
+    try {
+      await navigator.clipboard.writeText(message.content);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1600);
+    } catch {
+      setCopied(false);
+    }
+  }
 
   return (
     <article className={`message ${message.role}`}>
@@ -52,6 +65,19 @@ function Message({ message }) {
             <p>{message.content}</p>
           )}
         </div>
+        {isAssistant && message.content && !message.loading && !message.error && (
+          <div className="message-actions">
+            <button
+              className="copy-message"
+              onClick={copyResponse}
+              aria-label={copied ? "Response copied" : "Copy response"}
+              title={copied ? "Copied" : "Copy response"}
+            >
+              {copied ? <Check size={13} /> : <Copy size={13} />}
+              <span>{copied ? "Copied" : "Copy"}</span>
+            </button>
+          </div>
+        )}
       </div>
     </article>
   );

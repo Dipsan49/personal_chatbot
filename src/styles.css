@@ -67,10 +67,14 @@ a {
   min-height: 680px;
   display: grid;
   grid-template-columns: minmax(320px, 0.4fr) minmax(540px, 0.6fr);
+  gap: 12px;
+  padding: 10px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 28px;
-  background: var(--paper);
+  background:
+    linear-gradient(145deg, rgba(141, 123, 255, 0.045), transparent 32%),
+    #080b09;
   box-shadow:
     0 36px 110px rgba(0, 0, 0, 0.56),
     0 1px 0 rgba(255, 255, 255, 0.045) inset;
@@ -82,10 +86,20 @@ a {
   display: flex;
   flex-direction: column;
   padding: clamp(26px, 3vw, 46px);
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 20px;
   color: #f3f5ed;
   background:
     linear-gradient(150deg, rgba(255, 255, 255, 0.04), transparent 35%),
     linear-gradient(180deg, #121713, #0d110e);
+  transition:
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.profile-panel:hover {
+  border-color: rgba(216, 255, 98, 0.13);
+  box-shadow: 0 0 0 1px rgba(216, 255, 98, 0.025) inset;
 }
 
 .profile-panel::after {
@@ -214,6 +228,9 @@ a {
     0 18px 50px rgba(0, 0, 0, 0.35),
     0 0 0 8px rgba(255, 255, 255, 0.025);
   transform: rotate(-4deg);
+  transition:
+    transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 420ms ease;
 }
 
 .portrait::before,
@@ -253,6 +270,7 @@ a {
   position: absolute;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 50%;
+  transition: transform 650ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .orbit-one {
@@ -278,6 +296,21 @@ a {
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 0 15px rgba(216, 255, 98, 0.8);
+}
+
+.portrait-wrap:hover .portrait {
+  transform: rotate(0deg) scale(1.055);
+  box-shadow:
+    0 24px 58px rgba(0, 0, 0, 0.42),
+    0 0 0 9px rgba(141, 123, 255, 0.07);
+}
+
+.portrait-wrap:hover .orbit-one {
+  transform: rotate(46deg) scale(1.03);
+}
+
+.portrait-wrap:hover .orbit-two {
+  transform: rotate(-55deg) scale(1.04);
 }
 
 .availability-dot {
@@ -383,6 +416,18 @@ a {
   background: rgba(255, 255, 255, 0.04);
   font-size: 10px;
   font-weight: 600;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.skill-cloud span:hover {
+  color: #e7ece5;
+  border-color: rgba(141, 123, 255, 0.3);
+  background: rgba(141, 123, 255, 0.09);
+  transform: translateY(-2px);
 }
 
 .profile-links {
@@ -425,14 +470,33 @@ a {
 }
 
 .chat-panel {
+  position: relative;
   min-width: 0;
   min-height: 0;
   display: grid;
   grid-template-rows: 76px minmax(0, 1fr) auto;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: 20px;
   background:
     radial-gradient(circle at 50% -8%, rgba(141, 123, 255, 0.13), transparent 42%),
     radial-gradient(circle at 92% 88%, rgba(216, 255, 98, 0.035), transparent 34%),
     linear-gradient(180deg, #151a16, #111512);
+}
+
+.chat-panel::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 76px 0 0;
+  opacity: 0.13;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 38px 38px;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 72%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 72%);
+  pointer-events: none;
 }
 
 .chat-header {
@@ -477,11 +541,13 @@ a {
   border-radius: 50%;
   background: #88c640;
   box-shadow: 0 0 0 5px rgba(136, 198, 64, 0.12);
+  animation: status-pulse 2.4s ease-in-out infinite;
 }
 
 .status-dot.offline {
   background: #e2a448;
   box-shadow: 0 0 0 5px rgba(226, 164, 72, 0.12);
+  animation: none;
 }
 
 .header-actions {
@@ -523,6 +589,8 @@ a {
 }
 
 .conversation {
+  position: relative;
+  z-index: 1;
   min-height: 0;
   overflow-x: hidden;
   overflow-y: auto;
@@ -558,6 +626,18 @@ a {
     0 12px 30px rgba(0, 0, 0, 0.24),
     0 1px 0 rgba(255, 255, 255, 0.06) inset;
   transform: rotate(-4deg);
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.intro-icon:hover {
+  border-color: rgba(141, 123, 255, 0.34);
+  box-shadow:
+    0 15px 36px rgba(0, 0, 0, 0.3),
+    0 0 22px rgba(141, 123, 255, 0.1);
+  transform: rotate(0deg) scale(1.04);
 }
 
 .chat-intro h2 {
@@ -608,6 +688,14 @@ a {
   font-size: 11px;
   font-weight: 800;
   box-shadow: 0 5px 14px rgba(96, 118, 31, 0.12);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.message:hover .message-avatar {
+  transform: translateY(-2px) rotate(-4deg);
+  box-shadow: 0 8px 20px rgba(139, 171, 42, 0.2);
 }
 
 .message-content {
@@ -630,6 +718,8 @@ a {
 }
 
 .message-bubble {
+  position: relative;
+  overflow: hidden;
   padding: 13px 16px;
   border: 1px solid rgba(255, 255, 255, 0.085);
   border-radius: 6px 17px 17px 17px;
@@ -638,6 +728,39 @@ a {
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.14),
     0 1px 0 rgba(255, 255, 255, 0.025) inset;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.message-bubble::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 15%,
+    rgba(255, 255, 255, 0.055) 48%,
+    transparent 78%
+  );
+  transform: translateX(-120%);
+  transition: transform 560ms ease;
+  pointer-events: none;
+}
+
+.message:hover .message-bubble::before {
+  transform: translateX(120%);
+}
+
+.message.assistant:hover .message-bubble {
+  border-color: rgba(141, 123, 255, 0.25);
+  background: rgba(255, 255, 255, 0.052);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(141, 123, 255, 0.025) inset;
+  transform: translateY(-2px);
 }
 
 .message.user .message-bubble {
@@ -648,6 +771,12 @@ a {
   box-shadow: 0 10px 26px rgba(69, 55, 154, 0.25);
 }
 
+.message.user:hover .message-bubble {
+  background: linear-gradient(135deg, #8275ec, #6255c9);
+  box-shadow: 0 14px 34px rgba(69, 55, 154, 0.34);
+  transform: translateY(-2px);
+}
+
 .message.error .message-bubble {
   border-color: rgba(239, 114, 114, 0.3);
   color: #f0a3a3;
@@ -655,10 +784,52 @@ a {
 }
 
 .message-bubble p {
+  position: relative;
+  z-index: 1;
   margin: 0;
   font-size: 12px;
   line-height: 1.68;
   white-space: pre-wrap;
+}
+
+.message-actions {
+  height: 25px;
+  display: flex;
+  align-items: flex-end;
+  padding: 5px 3px 0;
+  opacity: 0;
+  transform: translateY(-3px);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.message:hover .message-actions,
+.message-actions:focus-within {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.copy-message {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 6px;
+  border: 0;
+  border-radius: 7px;
+  color: #758076;
+  background: transparent;
+  font-size: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    background 150ms ease;
+}
+
+.copy-message:hover {
+  color: #cbd3cb;
+  background: rgba(255, 255, 255, 0.045);
 }
 
 .thinking {
@@ -758,7 +929,8 @@ a {
 
 .send-button:hover:not(:disabled) {
   background: #cdfe36;
-  transform: translateY(-1px);
+  box-shadow: 0 9px 22px rgba(169, 207, 55, 0.2);
+  transform: translateY(-2px) scale(1.03);
 }
 
 .send-button:disabled {
@@ -819,6 +991,18 @@ a {
   }
 }
 
+@keyframes status-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 5px rgba(136, 198, 64, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 0 7px rgba(136, 198, 64, 0.035),
+      0 0 14px rgba(136, 198, 64, 0.32);
+  }
+}
+
 @media (max-width: 1100px) {
   .app-frame {
     grid-template-columns: minmax(280px, 0.37fr) minmax(500px, 0.63fr);
@@ -851,6 +1035,8 @@ a {
     height: 100dvh;
     min-height: 560px;
     grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0;
     border: 0;
     border-radius: 0;
   }
@@ -861,6 +1047,8 @@ a {
 
   .chat-panel {
     grid-template-rows: 70px minmax(0, 1fr) auto;
+    border: 0;
+    border-radius: 0;
   }
 
   .mobile-wordmark {
@@ -940,6 +1128,11 @@ a {
 
   .message.assistant .message-content {
     max-width: calc(100% - 40px);
+  }
+
+  .message-actions {
+    opacity: 0.7;
+    transform: none;
   }
 
   .message-bubble {
