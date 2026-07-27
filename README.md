@@ -15,6 +15,7 @@ technical skills, and personal interests.
    OLLAMA_BASE_URL=https://ollama.com
    OLLAMA_CHAT_MODEL=gpt-oss:20b
    OLLAMA_EMBEDDING_MODEL=
+   RESUME_PATH=
    PORT=3000
    ```
 
@@ -49,7 +50,10 @@ The cloud model and Ollama address can be overridden in `.env`.
 2. In Render, create a Blueprint and select the repository. Render reads
    `render.yaml`.
 3. Enter `OLLAMA_API_KEY` when prompted. Do not place the key in GitHub.
-4. Deploy and open the generated `onrender.com` URL.
+4. In the Render service, open **Environment → Secret Files**, add a file
+   named `resume.md`, and paste the contents of your local
+   `knowledge/resume.md`. Render exposes it at `/etc/secrets/resume.md`.
+5. Deploy and open the generated `onrender.com` URL.
 
 After deployment, the Express server and Ollama Cloud run independently of your
 computer.
@@ -72,5 +76,5 @@ The supplied PDF is image-based. On macOS, `npm run extract:resume` can OCR it a
 - `server/index.js` — API, security controls, streaming, and static server
 - `server/ollama.js` — authenticated Ollama Cloud streaming client
 - `server/rag.js` — profile loading and intent-aware retrieval
-- `knowledge/resume.md` — reviewed resume and user-provided profile knowledge
+- `knowledge/resume.md` — private local profile knowledge, ignored by Git
 - `.env` — private local development configuration

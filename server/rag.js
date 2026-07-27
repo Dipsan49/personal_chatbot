@@ -1,9 +1,20 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-const knowledgePath = resolve(import.meta.dirname, "..", "knowledge", "resume.md");
+const localKnowledgePath = resolve(
+  import.meta.dirname,
+  "..",
+  "knowledge",
+  "resume.md",
+);
 let knowledgePromise;
 let embeddedKnowledgePromise;
+
+function getKnowledgePath() {
+  return process.env.RESUME_PATH
+    ? resolve(process.env.RESUME_PATH)
+    : localKnowledgePath;
+}
 
 function normaliseWhitespace(value) {
   return value.replace(/\s+/g, " ").trim();
@@ -131,7 +142,7 @@ function intentBoost(query, title) {
 
 export async function loadKnowledge() {
   if (!knowledgePromise) {
-    knowledgePromise = readFile(knowledgePath, "utf8").then((resume) => {
+    knowledgePromise = readFile(getKnowledgePath(), "utf8").then((resume) => {
       const sections = resume
         .split(/\n(?=## )/)
         .map((section, index) => {
