@@ -1,5 +1,6 @@
 import {
   ArrowUp,
+  ArrowUpRight,
   Github,
   Linkedin,
   MapPin,
@@ -67,7 +68,16 @@ function ProfilePanel() {
           <span className="wordmark-mark">D</span>
           <span>askdipsan</span>
         </a>
-        <span className="profile-index">01 / PROFILE</span>
+        <a
+          className="portfolio-link"
+          href="https://dipsanbhattarai.vercel.app"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Explore Dipsan's portfolio"
+        >
+          <span>Beyond the avatar</span>
+          <ArrowUpRight size={13} />
+        </a>
       </div>
 
       <div className="portrait-wrap" aria-hidden="true">
@@ -317,6 +327,16 @@ export default function App() {
               </div>
             </div>
             <div className="header-actions">
+              <a
+                className="icon-button mobile-portfolio-link"
+                href="https://dipsanbhattarai.vercel.app"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Explore Dipsan's portfolio"
+                title="Beyond the avatar"
+              >
+                <ArrowUpRight size={17} />
+              </a>
               <button
                 className="icon-button"
                 onClick={resetConversation}
