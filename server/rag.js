@@ -81,12 +81,12 @@ function intentBoost(query, title) {
   let boost = 0;
 
   if (
-    /skill|technolog|tool|stack|language|framework|database|cloud/.test(
+    /skill|technolog|tool|stack|language|framework|database|cloud|docker|container|kubernetes|devops/.test(
       normalisedQuery,
     ) &&
     normalisedTitle === "technical skills"
   ) {
-    boost += 0.26;
+    boost += 0.6;
   }
 
   if (

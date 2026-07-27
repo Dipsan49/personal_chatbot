@@ -46,6 +46,17 @@ test("cloud mode retrieves resume context without an embedding model", async () 
   assert.match(result.content, /present/i);
 });
 
+test("undocumented technology questions retrieve technical skills for comparison", async () => {
+  const [result] = await retrieveResumeContext({
+    embed: null,
+    query: "Do you have experience with Docker?",
+    limit: 1,
+  });
+
+  assert.equal(result.title, "Technical skills");
+  assert.doesNotMatch(result.content, /Docker/i);
+});
+
 test("semantic retrieval ranks embedded resume sections", async () => {
   const vectorise = (value) => {
     const text = value.toLowerCase();
